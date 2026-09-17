@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>YouTube Channel Marketplace</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#080b12;
+  color:#fff;
+}
+header{
+  background:#111827;
+  border-bottom:1px solid #293244;
+  padding:18px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo{font-size:24px;font-weight:bold;color:#ff3030}
+.demo{
+  background:#332400;
+  color:#ffd54a;
+  border:1px solid #806400;
+  padding:7px 12px;
+  border-radius:20px;
+  font-size:12px;
+}
+.container{
+  max-width:950px;
+  margin:40px auto;
+  padding:0 20px;
+}
+.hero{text-align:center;margin-bottom:35px}
+.hero h1{font-size:38px;margin-bottom:10px}
+.hero p{color:#9ca3af}
+.card{
+  background:#111827;
+  border:1px solid #293244;
+  border-radius:18px;
+  padding:28px;
+  margin-bottom:20px;
+  box-shadow:0 15px 50px #0005;
+}
+h2{margin-top:0}
+label{
+  display:block;
+  margin:16px 0 7px;
+  color:#cbd5e1;
+  font-size:14px;
+}
+input{
+  width:100%;
+  padding:14px;
+  border-radius:9px;
+  border:1px solid #374151;
+  background:#0b101a;
+  color:#fff;
+  outline:none;
+}
+input:focus{border-color:#ef4444}
+button{
+  width:100%;
+  margin-top:20px;
+  padding:14px;
+  border:0;
+  border-radius:9px;
+  background:#ef3333;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+button:hover{background:#dc2626}
+.safe{
+  background:#0b2920;
+  border:1px solid #166534;
+  color:#86efac;
+  padding:14px;
+  border-radius:10px;
+  line-height:1.5;
+  font-size:14px;
+  margin-bottom:20px;
+}
+.warning{
+  background:#291b00;
+  border:1px solid #705000;
+  color:#facc15;
+  padding:14px;
+  border-radius:10px;
+  font-size:13px;
+  line-height:1.5;
+}
+.hidden{display:none}
+.timer{
+  text-align:center;
+  font-size:65px;
+  font-weight:bold;
+  margin:30px 0;
+  letter-spacing:3px;
+}
+.progress{
+  height:10px;
+  background:#273244;
+  border-radius:20px;
+  overflow:hidden;
+}
+.progress div{
+  height:100%;
+  width:0;
+  background:#ef3333;
+  transition:width 1s linear;
+}
+.status{
+  margin-top:20px;
+  padding:15px;
+  background:#0b101a;
+  border-radius:10px;
+  text-align:center;
+}
+.account{
+  display:none;
+  position:fixed;
+  top:15px;
+  right:15px;
+  width:280px;
+  background:#111827;
+  border:1px solid #374151;
+  border-radius:12px;
+  padding:18px;
+  z-index:10;
+  box-shadow:0 15px 50px #0008;
+}
+.account h3{margin-top:0}
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:15px;
+  background:#052e16;
+  color:#86efac;
+  font-size:11px;
+}
+footer{
+  text-align:center;
+  color:#64748b;
+  padding:30px;
+  font-size:12px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">ChannelHub</div>
+  
+     <nav>
+        <a href="file:///C:/Users/L/Documents/notepad++/main.html#sell">Buy</a>
+				<a href="file:///C:/Users/L/Pictures/contact.html">Contact us</a>
+		<a href="file:///C:/Users/L/Pictures/sign%20up.html">Sign up</a>
+	</nav>
+</header>
+
+<div class="container">
+
+  <div class="hero">
+    <h1>Sell Your YouTube Channel</h1>
+    <p>Seller-only marketplace</p>
+  </div>
+
+  <div class="card">
+
+    <h2>Seller Verification</h2>
+
+    <label>Email</label>
+    <input id="email"
+           type="text"
+           placeholder="demo@example.com"
+           autocomplete="off">
+
+    <label>Password</label>
+    <input id="password"
+           type="password"
+           placeholder="Enter password only"
+           autocomplete="off">
+
+    <label> UPI ID/ Verification Reference</label>
+    <input id="qr"
+           type="text"
+           placeholder="Example: DEMO-QR-2321"
+           autocomplete="off">
+
+    <label>YouTube Channel Name</label>
+    <input id="channel"
+           type="text"
+           placeholder="Example: My Gaming Channel">
+
+    <label>Asking Price</label>
+    <input id="price"
+           type="number"
+           placeholder="Example: 2500">
+
+    <button onclick="startDemo()">
+      START SELLER VERIFICATION
+    </button>
+
+  </div>
+
+  <div id="verificationCard" class="card hidden">
+
+    <h2>Verification In Progress</h2>
+
+
+    <div class="timer" id="timer">01:00</div>
+
+    <div class="progress">
+      <div id="progress"></div>
+    </div>
+
+    <div class="status" id="status">
+      verification started...
+    </div>
+
+  </div>
+
+  <div id="paymentCard" class="card hidden">
+
+    <h2>Payment Processing</h2>
+
+
+    <div class="timer" id="paymentTimer">00:30</div>
+
+    <div class="progress">
+      <div id="paymentProgress"></div>
+    </div>
+
+    <div class="status" id="paymentStatus">
+      payment processing...
+    </div>
+
+  </div>
+
+  <div id="completeCard" class="card hidden">
+
+    <h2>Seller Dashboard</h2>
+
+    <div class="safe">
+      <b>✓ Transaction Complete</b><br>
+    </div>
+
+    <p><b>Channel:</b> <span id="finalChannel"></span></p>
+    <p><b>Asking Price:</b> $<span id="finalPrice"></span></p>
+    <p><b>Demo Reference:</b> <span id="finalReference">2321</span></p>
+    <p>
+      <b>Status:</b>
+      <span class="badge">SIMULATED</span>
+    </p>
+
+    <button onclick="location.reload()">CREATE ANOTHER LISTING</button>
+
+  </div>
+
+</div>
+
+<div class="account" id="account">
+  <h3>Seller Activity</h3>
+  <p><span class="badge">DEMO</span></p>
+  <p id="accountChannel">No listing yet</p>
+  <p id="accountStatus">Waiting...</p>
+</div>
+
+<footer>
+  YouTube is a trademark of Google LLC. This independent is
+  affiliated with YouTube or Google.
+</footer>
+
+<script>
+
+let verifySeconds = 60;
+let paymentSeconds = 10;
+
+let verifyInterval;
+let paymentInterval;
+
+function startDemo(){
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value.trim();
+
+  const qr =
+    document.getElementById("qr").value.trim();
+
+  const channel =
+    document.getElementById("channel").value.trim();
+
+  const price =
+    document.getElementById("price").value.trim();
+
+  if(!email || !password || !qr || !channel || !price){
+    alert("Please complete all fields.");
+    return;
+  }
+
+  /*
+    SECURITY:
+    The values are intentionally NOT stored,
+    displayed or transmitted anywhere.
+  */
+
+  document.getElementById("verificationCard")
+    .classList.remove("hidden");
+
+  document.getElementById("account").style.display="block";
+
+  document.getElementById("accountChannel").textContent =
+    "Listing: " + channel;
+
+  document.getElementById("accountStatus").textContent =
+    "5-minute demo verification running";
+
+  verifySeconds = 300;
+
+  updateVerifyTimer();
+
+  clearInterval(verifyInterval);
+
+  verifyInterval = setInterval(function(){
+
+    verifySeconds--;
+
+    updateVerifyTimer();
+
+    const completed =
+      ((300 - verifySeconds) / 300) * 100;
+
+    document.getElementById("progress").style.width =
+      completed + "%";
+
+    if(verifySeconds <= 0){
+
+      clearInterval(verifyInterval);
+
+      document.getElementById("status").innerHTML =
+        "<b>✓ Demo verification finished</b>";
+
+      document.getElementById("accountStatus").textContent =
+        "Verification complete — payment simulation started";
+
+      startPayment(channel,price);
+    }
+
+  },1000);
+}
+
+
+function updateVerifyTimer(){
+
+  const min =
+    Math.floor(verifySeconds / 60);
+
+  const sec =
+    verifySeconds % 60;
+
+  document.getElementById("timer").textContent =
+    String(min).padStart(2,"0") + ":" +
+    String(sec).padStart(2,"0");
+}
+
+
+function startPayment(channel,price){
+
+  document.getElementById("paymentCard")
+    .classList.remove("hidden");
+
+  paymentSeconds = 120;
+
+  updatePaymentTimer();
+
+  clearInterval(paymentInterval);
+
+  paymentInterval = setInterval(function(){
+
+    paymentSeconds--;
+
+    updatePaymentTimer();
+
+    const completed =
+      ((120 - paymentSeconds) / 120) * 100;
+
+    document.getElementById("paymentProgress")
+      .style.width = completed + "%";
+
+    if(paymentSeconds <= 0){
+
+      clearInterval(paymentInterval);
+
+      document.getElementById("paymentStatus").innerHTML =
+        "<b>✓ Demo payment simulation finished</b>";
+
+      document.getElementById("accountStatus").textContent =
+        "Demo transaction finished";
+
+      document.getElementById("completeCard")
+        .classList.remove("hidden");
+
+      document.getElementById("finalChannel")
+        .textContent = channel;
+
+      document.getElementById("finalPrice")
+        .textContent =
+        Number(price).toLocaleString();
+
+    }
+
+  },1000);
+}
+
+
+function updatePaymentTimer(){
+
+  const min =
+    Math.floor(paymentSeconds / 60);
+
+  const sec =
+    paymentSeconds % 60;
+
+  document.getElementById("paymentTimer").textContent =
+    String(min).padStart(2,"0") + ":" +
+    String(sec).padStart(2,"0");
+}
+
+</script>
+
+</body>
+</html>
